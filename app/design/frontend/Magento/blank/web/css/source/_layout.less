@@ -11,31 +11,38 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
-
     .columns {
         #lib-layout-columns();
 
         .column.main {
             &:extend(.abs-add-box-sizing all);
             .lib-css(padding-bottom, @indent__xl);
-            .lib-vendor-prefix-flex-basis(auto);
+            // .lib-vendor-prefix-flex-basis(auto);
             .lib-vendor-prefix-flex-grow(1);
             .lib-vendor-prefix-order(1);
             width: 100%;
+            flex-basis: 80%;
+            margin-right: 14px;
         }
 
         .sidebar-main {
             &:extend(.abs-add-box-sizing all);
             .lib-vendor-prefix-flex-grow(1);
-            .lib-vendor-prefix-flex-basis(100%);
-            .lib-vendor-prefix-order(1);
+            // .lib-vendor-prefix-flex-basis(100%);
+            .lib-vendor-prefix-order(0);
+            flex-basis: 15%;
+            margin: 0 15px;
+            padding-left: 5px;
         }
 
         .sidebar-additional {
             &:extend(.abs-add-box-sizing all);
             .lib-vendor-prefix-flex-grow(1);
-            .lib-vendor-prefix-flex-basis(100%);
-            .lib-vendor-prefix-order(2);
+            // .lib-vendor-prefix-flex-basis(100%);
+            .lib-vendor-prefix-order(0);
+            flex-basis: 15%;
+            margin: 0 15px;
+            padding-left: 5px;
         }
     }
 }
@@ -44,7 +51,11 @@
 //  Mobile
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+.media-width(@extremum, @break)
+    when
+    (@extremum = "max")
+    and
+    (@break = @screen__m) {
     .navigation,
     .breadcrumbs,
     .page-header .header.panel,
@@ -72,7 +83,11 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+.media-width(@extremum, @break)
+    when
+    (@extremum = "min")
+    and
+    (@break = @screen__m) {
     .navigation,
     .breadcrumbs,
     .page-header .header.panel,
@@ -91,7 +106,6 @@
         padding-right: @layout-indent__width;
         width: auto;
     }
-
     .page-main {
         width: 100%;
     }
@@ -108,13 +122,12 @@
 
     .sidebar-main {
         #lib-layout-columns > .left();
-        padding-right: @layout-column-main__sidebar-offset;
+        padding-right: 0%;
         &:extend(.abs-add-box-sizing-desktop all);
     }
 
     .page-layout-2columns-right .sidebar-main {
         padding-left: @layout-column-main__sidebar-offset;
-        padding-right: 0;
     }
 
     .sidebar-additional {
@@ -126,7 +139,7 @@
 
     .page-layout-2columns-left {
         .main {
-            padding-left: @layout-column__additional-sidebar-offset
+            padding-left: @layout-column__additional-sidebar-offset;
         }
 
         .sidebar-additional {

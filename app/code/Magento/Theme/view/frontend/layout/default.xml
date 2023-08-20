@@ -33,7 +33,7 @@
                 </arguments>
             </block>
         </referenceContainer>
-        <referenceContainer name="header.container" >
+        <referenceContainer name="header.container">
             <!-- <container name="header.panel.wrapper" htmlClass="panel wrapper" htmlTag="div" before="-">
                 <container name="header.panel" label="Page Header Panel" htmlTag="div" htmlClass="panel header">
                     <block class="Magento\Framework\View\Element\Template" name="skip_to_content" template="Magento_Theme::html/skip.phtml">

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
@@ -11,7 +12,7 @@ use Magento\Framework\App\Action\Action;
 // phpcs:disable Generic.Files.LineLength.TooLong
 // phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper
 ?>
-<?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())): ?>
+<?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())) : ?>
     <?php
     $type = 'widget-product-grid';
 
@@ -26,8 +27,8 @@ use Magento\Framework\App\Action\Action;
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
     $description = false;
     ?>
-    <div class="block widget block-products-list <?= /* @noEscape */ $mode ?>">
-        <?php if ($block->getTitle()): ?>
+    <div class="block widget block-products-list <?= /* @noEscape */ $mode ?>" style="margin:0 50px;">
+        <?php if ($block->getTitle()) : ?>
             <div class="block-title">
                 <strong><?= $block->escapeHtml(__($block->getTitle())) ?></strong>
             </div>
@@ -37,7 +38,7 @@ use Magento\Framework\App\Action\Action;
             <div class="products-<?= /* @noEscape */ $mode ?> <?= /* @noEscape */ $mode ?>">
                 <ol class="product-items <?= /* @noEscape */ $type ?>">
                     <?php $iterator = 1; ?>
-                    <?php foreach ($items as $_item): ?>
+                    <?php foreach ($items as $_item) : ?>
                         <?= /* @noEscape */ ($iterator++ == 1) ? '<li class="product-item">' : '</li><li class="product-item">' ?>
                         <div class="product-item-info">
                             <a href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-photo">
@@ -45,56 +46,50 @@ use Magento\Framework\App\Action\Action;
                             </a>
                             <div class="product-item-details">
                                 <strong class="product-item-name">
-                                    <a title="<?= $block->escapeHtml($_item->getName()) ?>"
-                                       href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>"
-                                       class="product-item-link">
+                                    <a title="<?= $block->escapeHtml($_item->getName()) ?>" href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>" class="product-item-link">
                                         <?= $block->escapeHtml($_item->getName()) ?>
                                     </a>
                                 </strong>
-                                <?php if ($templateType): ?>
+                                <?php if ($templateType) : ?>
                                     <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
                                 <?php endif; ?>
-
-                                <?= $block->getProductPriceHtml($_item, $type) ?>
+                                <?= $block->getProductPriceHtml($_item, $type) ?>s
 
                                 <?= $block->getProductDetailsHtml($_item) ?>
 
-                                <?php if ($showWishlist || $showCompare || $showCart): ?>
+                                <?php if ($showWishlist || $showCompare || $showCart) : ?>
                                     <div class="product-item-inner">
                                         <div class="product-item-actions">
-                                            <?php if ($showCart): ?>
+                                            <?php if ($showCart) : ?>
                                                 <div class="actions-primary">
-                                                    <?php if ($_item->isSaleable()): ?>
+                                                    <?php if ($_item->isSaleable()) : ?>
                                                         <?php $postParams = $block->getAddToCartPostParams($_item); ?>
                                                         <form data-role="tocart-form" data-product-sku="<?= $block->escapeHtml($_item->getSku()) ?>" action="<?= $block->escapeUrl($postParams['action']) ?>" method="post">
                                                             <input type="hidden" name="product" value="<?= $block->escapeHtmlAttr($postParams['data']['product']) ?>">
                                                             <input type="hidden" name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>" value="<?= /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>">
                                                             <?= $block->getBlockHtml('formkey') ?>
-                                                            <button type="submit"
-                                                                    title="<?= $block->escapeHtml(__('Add to Cart')) ?>"
-                                                                    class="action tocart primary">
+                                                            <button type="submit" title="<?= $block->escapeHtml(__('Add to Cart')) ?>" class="action tocart primary">
                                                                 <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
                                                             </button>
                                                         </form>
-                                                    <?php else: ?>
-                                                        <?php if ($_item->isAvailable()): ?>
+                                                    <?php else : ?>
+                                                        <?php if ($_item->isAvailable()) : ?>
                                                             <div class="stock available"><span><?= $block->escapeHtml(__('In stock')) ?></span></div>
-                                                        <?php else: ?>
+                                                        <?php else : ?>
                                                             <div class="stock unavailable"><span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
                                                         <?php endif; ?>
                                                     <?php endif; ?>
                                                 </div>
                                             <?php endif; ?>
-                                            <?php if ($showWishlist || $showCompare): ?>
+                                            <?php if ($showWishlist || $showCompare) : ?>
                                                 <div class="actions-secondary" data-role="add-to-links">
-                                                    <?php if ($this->helper(\Magento\Wishlist\Helper\Data::class)->isAllow() && $showWishlist): ?>
-                                                        <a href="#"
-                                                           data-post='<?= /* @noEscape */ $block->getAddToWishlistParams($_item) ?>' class="action towishlist" data-action="add-to-wishlist" title="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>">
+                                                    <?php if ($this->helper(\Magento\Wishlist\Helper\Data::class)->isAllow() && $showWishlist) : ?>
+                                                        <a href="#" data-post='<?= /* @noEscape */ $block->getAddToWishlistParams($_item) ?>' class="action towishlist" data-action="add-to-wishlist" title="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>">
                                                             <span><?= $block->escapeHtml(__('Add to Wish List')) ?></span>
                                                         </a>
                                                     <?php endif; ?>
-                                                    <?php if ($block->getAddToCompareUrl() && $showCompare): ?>
-                                                        <?php $compareHelper = $this->helper(\Magento\Catalog\Helper\Product\Compare::class);?>
+                                                    <?php if ($block->getAddToCompareUrl() && $showCompare) : ?>
+                                                        <?php $compareHelper = $this->helper(\Magento\Catalog\Helper\Product\Compare::class); ?>
                                                         <a href="#" class="action tocompare" data-post='<?= /* @noEscape */ $compareHelper->getPostDataParams($_item) ?>' title="<?= $block->escapeHtmlAttr(__('Add to Compare')) ?>">
                                                             <span><?= $block->escapeHtml(__('Add to Compare')) ?></span>
                                                         </a>
@@ -113,13 +108,28 @@ use Magento\Framework\App\Action\Action;
             <?= $block->getPagerHtml() ?>
         </div>
     </div>
-    <?php if($block->getBlockHtml('formkey')): ?>
-    <script type="text/x-magento-init">
-    {
+    <?php if ($block->getBlockHtml('formkey')) : ?>
+        <script type="text/x-magento-init">
+            {
         ".block.widget [data-role=tocart-form]": {
             "Magento_Catalog/js/validate-product": {}
         }
     }
     </script>
-    <?php endif;?>
-<?php endif;?>
+    <?php endif; ?>
+<?php endif; ?>
+<style>
+    .product-item-info {
+        background-color: white;
+        margin: 10px 15px;
+    }
+
+    .product-item-details {
+        margin: 0 10px;
+        padding-bottom: 10px;
+    }
+
+    .product-item-name {
+        height: 50px;
+    }
+</style>

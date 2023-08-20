@@ -127,7 +127,7 @@
             }
 
             .limiter {
-                >.label {
+                > .label {
                     &:extend(.abs-visually-hidden all);
                 }
             }
@@ -292,7 +292,7 @@
         z-index: 1;
 
         &:before {
-            content: '';
+            content: "";
             height: 100%;
             left: 0;
             position: absolute;
@@ -349,7 +349,11 @@
 //  Mobile
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+.media-width(@extremum, @break)
+    when
+    (@extremum = "max")
+    and
+    (@break = @screen__s) {
     .account {
         .column.main,
         .sidebar-additional {
@@ -358,7 +362,11 @@
     }
 }
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+.media-width(@extremum, @break)
+    when
+    (@extremum = "max")
+    and
+    (@break = @screen__m) {
     .login-container {
         .fieldset {
             &:after {
@@ -406,7 +414,11 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+.media-width(@extremum, @break)
+    when
+    (@extremum = "min")
+    and
+    (@break = @screen__m) {
     .login-container {
         &:extend(.abs-add-clearfix-desktop all);
 

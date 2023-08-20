@@ -9,6 +9,7 @@
             .form.contact {
                 float: none;
                 width: 50%;
+                padding-right: 0%;
             }
         }
 
@@ -25,14 +26,22 @@
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+.media-width(@extremum, @break)
+    when
+    (@extremum = "min")
+    and
+    (@break = @screen__m) {
     .contact-index-index .column:not(.sidebar-additional) .form.contact {
         min-width: 600px;
     }
 }
 
 //  Mobile
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+.media-width(@extremum, @break)
+    when
+    (@extremum = "max")
+    and
+    (@break = @screen__m) {
     .contact-index-index {
         .column:not(.sidebar-main) {
             .form.contact {
@@ -49,4 +58,3 @@
         }
     }
 }
-

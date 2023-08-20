@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
@@ -15,7 +16,7 @@
 <?php if ($block->canShowBlock()) : ?>
     <div class="block filter">
         <div class="block-title filter-title">
-            <strong><?= $block->escapeHtml(__('Shop By')) ?></strong>
+            <!-- <strong><?= $block->escapeHtml(__('Shop By')) ?></strong> -->
         </div>
 
         <div class="block-content filter-content">
@@ -29,18 +30,43 @@
             <?php $wrapOptions = false; ?>
             <?php foreach ($block->getFilters() as $filter) : ?>
                 <?php if (!$wrapOptions) : ?>
-                    <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= $block->escapeHtml(__('Shopping Options')) ?></strong>
+                    <!-- <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= $block->escapeHtml(__('Shopping Options')) ?></strong> -->
                     <dl class="filter-options" id="narrow-by-list">
                     <?php $wrapOptions = true;
                 endif; ?>
                     <?php if ($filter->getItemsCount()) : ?>
-                        <dt role="heading" aria-level="3" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></dt>
-                        <dd class="filter-options-content"><?= /* @noEscape */ $block->getChildBlock('renderer')->render($filter) ?></dd>
+                        <dt role="heading" aria-level="3" class="filter-options-title" style="font-size:14px;">
+                            <?= $block->escapeHtml(__($filter->getName() == 'Category' ? 'Danh mục sản phẩm' : 'Giá')) ?></dt>
+                        <dd class="filter-options-content" style=" color: black;line-height: 16px;"><?= /* @noEscape */ $block->getChildBlock('renderer')->render($filter) ?></dd>
                     <?php endif; ?>
-            <?php endforeach; ?>
-            <?php if ($wrapOptions) : ?>
-                </dl>
-            <?php endif; ?>
+                <?php endforeach; ?>
+                <?php if ($wrapOptions) : ?>
+                    </dl>
+                <?php endif; ?>
+                <style>
+                    .filter {
+                        background-color: white;
+                        padding: 10px 5px 10px 15px;
+                    }
+
+                    .filter-content {
+                        padding: 0;
+                        margin: 0;
+                    }
+
+                    .filter-options-content {
+                        font-size: 13px;
+                        display: flex;
+                    }
+
+                    .items {
+                        line-height: 30px;
+                    }
+
+                    .count {
+                        display: none;
+                    }
+                </style>
         </div>
     </div>
 <?php endif; ?>

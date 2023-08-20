@@ -1,10 +1,8 @@
 <?php
-
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 declare(strict_types=1);
 
 namespace Magento\Framework;
@@ -57,7 +55,7 @@ class Escaper
      * @var string
      */
     private static $xssFiltrationPattern =
-    '/((javascript(\\\\x3a|:|%3A))|(data(\\\\x3a|:|%3A))|(vbscript:))|'
+        '/((javascript(\\\\x3a|:|%3A))|(data(\\\\x3a|:|%3A))|(vbscript:))|'
         . '((\\\\x6A\\\\x61\\\\x76\\\\x61\\\\x73\\\\x63\\\\x72\\\\x69\\\\x70\\\\x74(\\\\x3a|:|%3A))|'
         . '(\\\\x64\\\\x61\\\\x74\\\\x61(\\\\x3a|:|%3A)))/i';
 
@@ -122,10 +120,10 @@ class Escaper
                 $this->escapeAttributeValues($domDocument);
 
                 $result = mb_decode_numericentity(
-                    // phpcs:ignore Magento2.Functions.DiscouragedFunction
+                // phpcs:ignore Magento2.Functions.DiscouragedFunction
                     html_entity_decode(
                         $domDocument->saveHTML(),
-                        ENT_QUOTES | ENT_SUBSTITUTE,
+                        ENT_QUOTES|ENT_SUBSTITUTE,
                         'UTF-8'
                     ),
                     $convmap,
@@ -168,8 +166,8 @@ class Escaper
         $xpath = new \DOMXPath($domDocument);
         $nodes = $xpath->query(
             '//node()[name() != \''
-                . implode('\' and name() != \'', array_merge($allowedTags, ['html', 'body']))
-                . '\']'
+            . implode('\' and name() != \'', array_merge($allowedTags, ['html', 'body']))
+            . '\']'
         );
         foreach ($nodes as $node) {
             if ($node->nodeName != '#text') {
@@ -197,7 +195,7 @@ class Escaper
         foreach ($this->notAllowedAttributes as $tag => $attributes) {
             $nodes = $xpath->query(
                 '//@*[name() =\'' . implode('\' or name() = \'', $attributes) . '\']'
-                    . '[parent::node()[name() = \'' . $tag . '\']]'
+                . '[parent::node()[name() = \'' . $tag . '\']]'
             );
             foreach ($nodes as $node) {
                 $node->parentNode->removeAttribute($node->nodeName);

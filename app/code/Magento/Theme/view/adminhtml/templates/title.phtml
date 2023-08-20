@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
@@ -13,6 +14,6 @@ $title = $block->getPageTitle();
 ?>
 
 <div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
-    <h1 class="page-title"<?= /* @noEscape */ $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
+    <h1 class="page-title" <?= /* @noEscape */ $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
     <?= $block->getChildHtml() ?>
 </div>

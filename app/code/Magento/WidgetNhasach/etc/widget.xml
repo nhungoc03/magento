@@ -1,0 +1,15 @@
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="widgetnhasach" class="Magento\WidgetNhasach\Block\Widget\Carosel">
+        <label translate="true">Carosel Store</label>
+        <description translate="true">List Carosel</description>
+        <parameters>
+            <parameter name="title" xsi:type="text">
+                <label>Title</label>
+            </parameter>
+            <parameter name="widgetcontent" xsi:type="textarea">
+                <label>Content</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

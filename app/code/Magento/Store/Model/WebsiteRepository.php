@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
@@ -144,8 +143,6 @@ class WebsiteRepository implements \Magento\Store\Api\WebsiteRepositoryInterface
     /**
      * @inheritdoc
      */
-
-
     public function getDefault()
     {
         if (!$this->default) {
@@ -158,14 +155,13 @@ class WebsiteRepository implements \Magento\Store\Api\WebsiteRepositoryInterface
             if (!$this->allLoaded) {
                 $this->initDefaultWebsite();
             }
-             if (!$this->default) {
-                 throw new \DomainException(__("The default website isn't defined. Set the website and try again."));
-             }
+            if (!$this->default) {
+                throw new \DomainException(__("The default website isn't defined. Set the website and try again."));
+            }
         }
 
         return $this->default;
     }
-
 
     /**
      * @inheritdoc
@@ -206,7 +202,7 @@ class WebsiteRepository implements \Magento\Store\Api\WebsiteRepositoryInterface
                     throw new \DomainException(
                         __(
                             'The default website is invalid. '
-                                . 'Make sure no more than one default is defined and try again.'
+                            . 'Make sure no more than one default is defined and try again.'
                         )
                     );
                 }
@@ -220,4 +216,3 @@ class WebsiteRepository implements \Magento\Store\Api\WebsiteRepositoryInterface
         }
     }
 }
-

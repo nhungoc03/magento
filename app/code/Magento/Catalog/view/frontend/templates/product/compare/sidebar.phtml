@@ -13,7 +13,6 @@
         <strong id="block-compare-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Compare Products')) ?></strong>
         <span class="counter qty no-display" data-bind="text: compareProducts().countCaption, css: {'no-display': !compareProducts().count}"></span>
     </div>
-    <!-- ko if: compareProducts().count -->
     <div class="block-content no-display" aria-labelledby="block-compare-heading" data-bind="css: {'no-display': !compareProducts().count}">
         <ol id="compare-items" class="product-items product-items-names" data-bind="foreach: compareProducts().items">
                 <li class="product-item">
@@ -42,10 +41,8 @@
             </div>
         </div>
     </div>
-    <!-- /ko -->
-    <!-- ko ifnot: compareProducts().count -->
     <div class="empty"><?= $block->escapeHtml(__('You have no items to compare.')) ?></div>
-    <!-- /ko -->
+   
 </div>
 <script type="text/x-magento-init">
 {"[data-role=compare-products-sidebar]": {"Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>}}
