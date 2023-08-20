@@ -1,84 +1,53 @@
+### Sau khi tải thành công. Thực hiện lần lượt các bước như sau:
 
-<p align="center">
-<a href="https://www.codetriage.com/magento/magento2"><img src="https://www.codetriage.com/magento/magento2/badges/users.svg" alt="Open Source Helpers" /></a>
-<a href="https://gitter.im/magento/magento2?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter" /></a> <a href="https://crowdin.com/project/magento-2"><img src="https://d322cqt584bo4o.cloudfront.net/magento-2/localized.svg" alt="Crowdin" /></a><br/>
-<a href="https://magento.com/products/magento-open-source">
-<img alt="Adobe logo" height="50px" src="https://www.adobe.com/content/dam/cc/icons/Adobe_Corporate_Horizontal_Red_HEX.svg"/>
-</a>
-</p>
+B1: Tải xampp vì sẽ dùng apache của xampp. Giari nén source code, đặt trong thư mục xampp\htdocs\magento2
 
-<h1 align="center">Magento Open Source</h1>
+B2: Mở command prompt ở thư mục chứa source code, chạy lệnh "composer install"
 
-Welcome to the Magento Open Source project! [Magento Open Source](https://magento.com/products/magento-open-source) software delivers basic eCommerce capabilities to build a unique online store from the ground up.
+B3: Sau đó tiếp tục chạy lệnh "docker-compose up. Tải docker nếu chưa có docker
 
-However, for those who need a full-featured eCommerce solution, we recommend [Adobe Commerce](https://magento.com/products/magento-commerce), which includes our optimized cloud architecture and hosting as well as AI-powered merchandising and analytics.
+B4: Mở xampp control panel, chọn config apache, mở file php.ini sau đó tìm và xóa dấu chấm phẩy ở đầu các dòng
 
-## Get started
+```bash
+    ;extension=gd 
+    ;extension=intl 
+    ;extension=soap 
+    ;extension=xsl 
+    ;extension=sockets 
+    ;extension=sodium
+```
+Ngoài ra thay đổi các dòng:
+```bash
+    max_execution_time=3000 
+    max_input_time=2000 
+    memory_limit=4G
+```
+B5: Mở file xampp/apache/conf/extra/httpd-vhosts.conf thêm đoạn code sau
+```xml
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/magento2/pub"
+    ServerName nhasachtiki.com
+</VirtualHost>
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs"
+    ServerName localhost
+</VirtualHost>
+```
+B6: Mở file C:\Windows\System32\drivers\etc\hosts dưới với trò admin (Run as administrator) thêm dòng code sau 
+    127.0.0.1 nhasachtiki.com
 
-- [Quick start install](https://devdocs.magento.com/guides/v2.4/install-gde/composer.html)
-- [System requirements](https://devdocs.magento.com/guides/v2.4/install-gde/system-requirements.html)
-- [Prerequisites](https://devdocs.magento.com/guides/v2.4/install-gde/prereq/prereq-overview.html)
-- [More installation options](https://devdocs.magento.com/guides/v2.4/install-gde/bk-install-guide.html)
+B7: Truy cập http://localhost:8080 tạo database mới với tên "magento2"
 
-## Get help
+B8: Mở command prompt ở thư mục chứa source code, chạy lệnh sau 
+```bash
+php bin/magento setup:install --base-url="http://nhasachtiki.com" --db-host="localhost" --db-name="magento2" --db-user="root" --db-password="root" --admin-firstname="admin" --admin-lastname="admin" --admin-email="admin@magetop.com" --admin-user="admin" --admin-password="admin123" --language="en_US" --use-rewrites="1" --backend-frontname="admin" --search-engine=elasticsearch7 --elasticsearch-host="localhost" --elasticsearch-port=9200 
+```
 
-- [Help center](https://support.magento.com/hc/en-us)
+B9. Chạy các lệnh sau:
+```bash
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy -f
+php bin/magento cache:flush
+```
 
-## Contribute
-
-Our [Community](https://opensource.magento.com/) is large and diverse, and our project is enormous. As a contributor, you have countless opportunities to impact product development and delivery by introducing new features or improving existing ones, enhancing test coverage, updating documentation for [developers](https://devdocs.magento.com/) and [end-users](https://docs.magento.com/user-guide/), catching and fixing code bugs, suggesting points for optimization, and sharing your great ideas.
-
-- [Contribute to the code](https://devdocs.magento.com/contributor-guide/contributing.html)
-- [Report an issue](https://devdocs.magento.com/contributor-guide/contributing.html#report)
-- [Improve the developer documentation](https://github.com/magento/devdocs)
-- [Improve the end-user documentation](https://github.com/magento/merchdocs)
-- [Shape the future of Magento Open Source](https://developer.adobe.com/open/magento)
-
-### Maintainers
-
-We encourage experts from the Community to help us with GitHub routines such as accepting, merging, or rejecting pull requests and reviewing issues. Adobe has granted the Community Maintainers permission to accept, merge, and reject pull requests, as well as review issues. Thanks to invaluable input from the Community Maintainers team, we can significantly improve contribution quality and accelerate the time to deliver your updates to production. 
-
-- [Learn more about the Maintainer role](https://devdocs.magento.com/contributor-guide/maintainers.html)
-- [Maintainer's Handbook](https://devdocs.magento.com/contributor-guide/maintainer-handbook.html)
-
-[![](https://raw.githubusercontent.com/wiki/magento/magento2/images/maintainers.png)](https://magento.com/magento-contributors#maintainers)
-
-### Leaders
-
-Adobe highly appreciates contributions that help us to improve the code, clarify the documentation, and increase test coverage. Check out our Community leaders, superstars, and superheroes on the [leaderboard](https://magento.biterg.io/app/kibana#/dashboard/41dc0c60-fa06-11eb-bbaa-dd6ca6f8fda8?_g=()).
-
-[![](https://raw.githubusercontent.com/wiki/magento/magento2/images/contributors.png)](https://magento.com/magento-contributors)
-
-### Labeling
-
-We use labels in the GitHub issues and pull requests to help the participants retrieve additional information such as progress, component assignments, or release lines.
-
-- [Labels applied by the Community Engineering team](https://devdocs.magento.com/contributor-guide/contributing.html#labels)
-
-## Security
-
-[Security](https://devdocs.magento.com/guides/v2.4/architecture/security_intro.html) is one of the highest priorities at Adobe. To learn more about reporting security concerns, visit the [Adobe Bug Bounty Program](https://hackerone.com/adobe).
-
-Stay up-to-date on the latest security news and patches by signing up for [Security Alert Notifications](https://magento.com/security/sign-up).
-
-## Licensing
-
-Each Magento source file included in this distribution is licensed under OSL 3.0 or the terms and conditions of the applicable ordering document between Licensee/Customer and Adobe (or Magento).
- 
-[Open Software License (OSL 3.0)](https://opensource.org/licenses/osl-3.0.php) – Please see [LICENSE.txt](LICENSE.txt) for the full text of the OSL 3.0 license.
- 
-Subject to Licensee's/Customer's payment of fees and compliance with the terms and conditions of the applicable ordering document between Licensee/Customer and Adobe (or Magento), the terms and conditions of the applicable ordering between Licensee/Customer and Adobe (or Magento) supersede the OSL 3.0 license for each source file.
-
-## Communications
-
-We are dedicated to our Community and encourage your contributions and welcome feedback through [events](https://www.adobe.io/open/magento/calendar), our [DevBlog](https://community.magento.com/t5/Magento-DevBlog/bg-p/devblog), Twitter and YouTube channels, and [other Community resources](https://devdocs.magento.com/community/resources.html).
-
-To connect with people from the Community and Adobe engineering, [join us in Slack](https://magentocommeng.slack.com). We have a channel for every project. To join a particular channel, send us a request at [engcom@adobe.com](mailto:engcom@adobe.com), or [sign up](https://opensource.magento.com/slack).
-
-- [Popular Slack channels](https://www.adobe.io/open/magento/slack)
-
-If you are a new Community member, check out the following channels:
-
-- [general](https://magentocommeng.slack.com/archives/C4YS78WE6) is an open chat for introductions and Magento 2 questions
-- [github](https://magentocommeng.slack.com/archives/C7KB93M32) is a support channel for GitHub issues, pull requests, and processes
-- [public-backlog](https://magentocommeng.slack.com/archives/CCV3J3RV5) for discussions of the backlog
+Cuối cùng hãy chạy thử trang web "nhasachtiki.com".
